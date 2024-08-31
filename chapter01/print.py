@@ -7,6 +7,7 @@ print(f"Hello, {first_name.capitalize()} {last_name.capitalize()}. You are study
 
 #, first_name, last_name, major
 import copy
+import getpass
 import json
 
 def save_data(data):
@@ -36,23 +37,23 @@ def pass_match(username, password, re_password, data):
     else:
         while password != re_password:
             print("Passwords do not match! Re-enter password again")
-            password = input("What would you like your password to be?\n")
-            re_password = input("Re-enter your password\n")
+            password = getpass.getpass("What would you like your password to be?\n")
+            re_password = getpass.getpass("Re-enter your password\n")
         pass_match(username, password, re_password, data)
 
 def createUser(data):
     username = input("What would you like you username to be?\n")
     while username in User.all_users["username"]:
         username  = input(f"username:{username} already exsists! Enter new a username!\n")
-    password = input("What would you like your password to be?\n")
+    password = getpass.getpass("What would you like your password to be?\n")
     while password in User.all_users["password"]:
-        password = input(f"password:{password} already being used! Enter new a password!\n")
-    re_password = input("Re-enter your password\n")
+        password = getpass.getpass(f"password:{password} already being used! Enter new a password!\n")
+    re_password = getpass.getpass("Re-enter your password\n")
     pass_match(username, password, re_password, data)
 
 def auth_user(data):
     username = input("What is your username?\n")
-    password = input("what is your password?\n")
+    password = getpass.getpass("what is your password?\n")
     for user_dict in User.all_users["users_codes"]:
         if username == user_dict["username"] and password == user_dict["password"]:
             user_id = user_dict["user_id"]
@@ -63,7 +64,7 @@ def auth_user(data):
     return "invalid credentials! User not authenticated"
 
 def add_new_info(new_info, current_user, data):
-    added_info = input(f"What is the {new_info} information?\n")
+    added_info = getpass.getpass(f"What is the {new_info} information?\n")
     if len(added_info) > 0:
         data["users"][str(current_user._user_id)][new_info] = added_info
     print(data["users"][str(current_user._user_id)])
@@ -95,7 +96,7 @@ def display_prompt():
                 print(f"{view_info} : {current_user.__dict__[view_info]}")
             else:
                 print(f"{view_info} information is not stored on that user?\n")
-                ask_to_add = input(f"What you like to add {view_info}")
+                ask_to_add = input(f"What you like to add {view_info}?\n")
                 if ask_to_add in ["yes", "Yes"]:
                     add_new_info(view_info, current_user)
     elif command == 'view all info':

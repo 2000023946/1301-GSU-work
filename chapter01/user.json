@@ -1,1 +1,23 @@
-{}
+{
+    "username": [
+        "m"
+    ],
+    "password": [
+        "m"
+    ],
+    "users_codes": [
+        {
+            "username": "m",
+            "password": "m",
+            "user_id": 1
+        }
+    ],
+    "users": {
+        "1": {
+            "_user_id": 1,
+            "_username": "m",
+            "_password": "m",
+            "gsu password": "09ijasdf"
+        }
+    }
+}
